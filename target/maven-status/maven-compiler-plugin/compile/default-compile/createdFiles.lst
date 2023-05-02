@@ -1,8 +1,0 @@
-com\gridgain\ClusterClient.class
-com\gridgain\GridGainParquetSchemaPrinter.class
-com\gridgain\GridGainParquetCreateTablePrinter.class
-com\gridgain\GridGainBinaryObjectBuilder.class
-com\gridgain\GridGainParquetBinaryObjectStreamer.class
-com\gridgain\SchemaTypeHelper.class
-com\gridgain\PartitionSpecParent.class
-com\gridgain\GridGainParquetOperations.class
