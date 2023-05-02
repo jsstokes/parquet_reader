@@ -13,7 +13,7 @@ files in parquet format and store the associated data into a target GridGain clu
 - Parquet files are very often stored in partitioned data sets
 - Parquet files do not hold the partition column names or values
 - Most parquet files do not have a column that servers as a primary key for the file
-- Parquet supports nested data types such as list (array), map, struct (object) 
+- Parquet supports nested data types such as map, list (array), struct (object) 
 
 ## Implementation Details
 - To address the absence of primary keys a new field named "pk" (type=UUID) is added as the first column
@@ -51,22 +51,23 @@ Execute the application with no arguments to display help page:<br/>
 java -jar parquet-reader-1.0-SNAPSHOT.jar
 
 ### Print File Schema
-Execute the application with with the -print_schema argument as follows:<br/>
+Execute the application with the -print_schema argument as follows:<br/>
+Note: Be sure to double quote the path and file name argument should it have any spaces<br/>
 java -jar parquet-reader-1.0-SNAPSHOT.jar -print_schema /target/path/and/file_name
 
 ### Print Create Table Statement
 Execute the application with with the -create_table argument<br/>
-Note be sure to double quote the path and file name argument should it have any spaces<br/>
-Note that the table_name argument must be specified as SCHEMA_NAME.TABLE_NAME (i.e. PUBLIC.TABLE_X).<br/>
-Note that partition_spec1, partition_spec2, partition_spec3 are all optional arguments<br/>
-Note that any partition columns MUST be specified in the create table statement of ingesting data will NOT support any partitions!<br/>
+Note: Be sure to double quote the path and file name argument should it have any spaces<br/>
+Note: The table_name argument must be specified as SCHEMA_NAME.TABLE_NAME (i.e. PUBLIC.TABLE_X).<br/>
+Note: That partition_spec1, partition_spec2, partition_spec3 are all optional arguments<br/>
+Note: Any partition columns MUST be specified in the create table statement or ingesting data will NOT support any partitions!<br/>
 java -jar parquet-reader-1.0-SNAPSHOT.jar -create_table /target/path/and/file_name table_name partition_spec1 partition_spec2 partition_spec3
 
 ### Ingest File Data
 Execute the application with with the -ingest_data argument<br/>
-Note be sure to double quote the path and file name argument should it have any spaces<br/>
-Note that the table_name argument must be specified as SCHEMA_NAME.TABLE_NAME (i.e. PUBLIC.TABLE_X).<br/>
-Note that partition_spec1, partition_spec2, partition_spec3 are all optional arguments<br/>
-Note that the partition column names MUST be the same column names used in the create statement invocation above<br/>
-Note that the partition column values can be different for each file<br/>
+Note: Be sure to double quote the path and file name argument should it have any spaces<br/>
+Note: The table_name argument must be specified as SCHEMA_NAME.TABLE_NAME (i.e. PUBLIC.TABLE_X).<br/>
+Note: That partition_spec1, partition_spec2, partition_spec3 are all optional arguments<br/>
+Note: The partition column names MUST be the same column names used in the create statement invocation above<br/>
+Note: The partition column values can be different for each file<br/>
 java -jar parquet-reader-1.0-SNAPSHOT.jar -ingest_data /target/path/and/file_name table_name partition_spec1 partition_spec2 partition_spec3
