@@ -36,13 +36,11 @@ public class GridGainParquetBinaryObjectStreamer {
             try (IgniteDataStreamer<UUID, BinaryObject> streamer = cluster.dataStreamer(tableName_)) {
                 while ((record = reader.read()) != null) {
                     ++recordCount;
-                    BinaryObjectBuilder bob = cluster.binary().builder(tableName_.split("[.][1]"));
+                    String tableOnly = tableName_.split("[.]")[1];
+                    BinaryObjectBuilder bob = cluster.binary().builder(tableOnly);
                     BinaryObject bo = builder_.process(bob, record);
                     UUID pk = bo.field("pk");
                     streamer.addData(pk, bo);
-                    if(recordCount == 100) {
-                        break;
-                    }
                 }
             }
             reader.close();
